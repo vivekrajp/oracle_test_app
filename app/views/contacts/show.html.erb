@@ -1,0 +1,21 @@
+<% content_for :page_header do %>
+  Viewing contact details for <%= @contact.name %>
+<% end %>
+
+<h3> Contact phone numbers </h3>
+
+<% @contact.contact_phone_numbers.each do |contact_phone_number| %>
+	<%= contact_phone_number.phone_type %>
+	<%= contact_phone_number.number %><br>
+<% end %>
+
+<h3> Contact addresses </h3>
+
+<% @contact.contact_addresses.each do |contact_address| %>
+	<%= contact_address.address_type %>
+	<%= contact_address.address %><br>
+<% end %>
+<br>
+<br>
+<%= link_to 'Back', contacts_path %>&nbsp;&nbsp;
+<%= link_to 'New contact', new_contact_path %>

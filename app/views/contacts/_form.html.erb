@@ -1,0 +1,29 @@
+<% if @contact.errors.any? %>
+  <% @contact.errors.messages.each do |error_type, error_message| %>
+    <span style="color: red;"> <%= error_message[0] %> </span> <br />
+  <% end %>
+  <br>
+<% end %>
+<%= form_for @contact do |f| %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<h3> Contact phone numbers </h3>
+	<div id="contact_phone_numbers">
+		<%= f.fields_for :contact_phone_numbers do |contact_phone_number| %>
+	    	<%= render "contact_phone_number_fields", f: contact_phone_number %>
+	    	<%= link_to_add_association 'Add phone', f, :contact_phone_numbers %>	
+    	<% end %>
+	</div>
+	<h3> Contact addresses </h3>
+	<div id="contact_addresses">
+		<%= f.fields_for :contact_addresses do |contact_address| %>
+	    	<%= render "contact_address_fields", f: contact_address %>
+	    	<%= link_to_add_association 'Add address', f, :contact_addresses %> 	
+    	<% end %>
+	</div>
+	<br>
+	<br>    
+    <%= f.submit %>
+<% end %>
